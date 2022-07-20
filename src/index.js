@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -10,20 +9,20 @@ const theme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#3f51b5',
+      main: '#5A7285',
     },
     secondary: {
-      main: '#bf6690',
+      main: '#60B5C2',
     },
     error: {
       main: '#f67b50',
     },
     info: {
-      main: '#94c0d0',
+      main: '#B97B77',
     },
   },
   typography: {
-    fontFamily: 'Gothic A1',
+    fontFamily: 'Raleway',
   },
 });
 

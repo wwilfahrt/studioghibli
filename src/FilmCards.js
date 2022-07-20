@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardMedia, CardActions, Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import EachFilmInfo from './EachFilmInfo';
+import { Grid, Card, CardMedia, CardActions, Button, ButtonGroup } from '@mui/material';
+import { Info } from '@mui/icons-material';
+import './FilmCards.css';
+import MoreInfoDropdown from './MoreInfoDropdown';
+
 
 const FilmCards = (props) => {
+    const films = props.films;
+    const favorites = props.favorites;
     const [moreInfo, setMoreInfo] = useState({});
-    const films = props.filteredFilms;
+    const FavoritesComponent = props.favoriteComponent;
 
     function moreInfoHandler(id) {
         setMoreInfo(state => ({
@@ -12,31 +17,36 @@ const FilmCards = (props) => {
             [id]: !state[id]
         }));
     };
-    
+
     return (
-        <>
+        <div className="container">
         {
         films.map(film => 
             <Grid item xs={6} sm={4} md={3} key={film.id}>
-                <Card variant="outlined" >
+                <Card className="card" key={film.id}>
                     <CardMedia
-                        component="img"
-                        alt="movie poster"
-                        height="100%"
-                        width="66%"
-                        image={film.image} />
-                    <CardActions>
-                        <Button size="small" variant="outlined" onClick={() => (moreInfoHandler(film.id))}>More Info</Button>
-                        <FormGroup>
-                            <FormControlLabel id={film.title} value={film.title} control={<Checkbox />} label="Watched" sx={{ marginLeft: '20px' }} onChange={props.handleCheckBoxChange}  />
-                        </FormGroup>
-                    </CardActions>
-                    {moreInfo[film.id] && <EachFilmInfo title={film.title} director={film.director} originaltitle={film.original_title} releasedate={film.release_date} description={film.description} />}
-                </Card>
+            className="movieposter"
+            component="img"
+            alt="movie poster"
+            image={film.image} />
+        <CardActions>
+            <ButtonGroup>
+            {!moreInfo[film.id] && <Button variant="outlined" onClick={() => (moreInfoHandler(film.id))}>
+                More Info
+                <span>
+                <Info className="info" />
+                </span>
+            </Button>}
+            <Button variant="outlined" size="small" className="favorite" onClick={() => props.handleFavoritesClick(film, favorites)}>
+            <FavoritesComponent film={film} />
+            </Button>
+            </ButtonGroup>
+        </CardActions>
+            {moreInfo[film.id] && <MoreInfoDropdown handleClose={moreInfoHandler} id={film.id} title={film.title} director={film.director} originaltitle={film.original_title} releasedate={film.release_date} />}
+    </Card>
             </Grid>
-            
         )}
-        </>
+        </div>
     )
 }
 export default FilmCards;

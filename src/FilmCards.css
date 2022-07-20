@@ -1,0 +1,28 @@
+.favorite {
+    margin-left: 4rem;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+  }
+.container {
+	display: inline-flex;
+	overflow-x: scroll;
+	width: 100%;
+  }
+  .card {
+	height: auto;
+	width: 20rem;
+	padding: 5px;
+	margin: 10px;
+  }
+  
+  .movieposter {
+	height: auto;
+	width: auto;
+  }
+
+  .info {
+	margin-left: .5rem;
+  }
+
